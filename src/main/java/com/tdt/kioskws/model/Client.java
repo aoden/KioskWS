@@ -1,8 +1,10 @@
 package com.tdt.kioskws.model;
 
 import com.tdt.kioskws.dto.ClientDTO;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -13,6 +15,8 @@ import javax.persistence.*;
 @Builder
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Client {
 
     @Id

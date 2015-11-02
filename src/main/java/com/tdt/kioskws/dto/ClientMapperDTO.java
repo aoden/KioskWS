@@ -1,17 +1,21 @@
 package com.tdt.kioskws.dto;
 
 import com.tdt.kioskws.model.ClientMapper;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * ClientMapperDTO
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ClientMapperDTO {
 
-    protected Integer id;
+    protected int id;
     protected ClientDTO client;
     protected String key;
 
@@ -19,9 +23,9 @@ public class ClientMapperDTO {
 
         return ClientMapper
                 .builder()
-                .key(key)
                 .id(id)
-                .client(client == null ? null :client.toEntity())
+                .key(key)
+                .client(client == null ? null : client.toEntity())
                 .build();
     }
 }

@@ -6,14 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
  * AccessKeyFilter
+ *
  * @author aoden
  */
 @Component
@@ -31,11 +30,17 @@ public class AccessKeyFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest servletRequest = (HttpServletRequest) request;
-        HttpSession session = servletRequest.getSession();
-        String submittedAccessKey = servletRequest.getParameter("key");
-        if (StringUtils.isNotEmpty(submittedAccessKey)) {
+        ServletContext sce = servletRequest.getSession().getServletContext();
+        String submittedAccessKey = servletRequest.getParameter("key") != null ?
+                servletRequest.getParameter("key") :
+                servletRequest.getParameter("access_token");
+        boolean isNewRequests = servletRequest.getServletPath().equals("/sign_up")
+                || servletRequest.getServletPath().equals("/add_key");
+        if (StringUtils.isNotEmpty(submittedAccessKey) || isNewRequests) {
 
-            if (servletRequest.getServletPath().equals("/link") || submittedAccessKey.equals(session.getAttribute("key"))) {
+            if (servletRequest.getServletPath().equals("/link")
+                    || isNewRequests
+                    || submittedAccessKey.equals(sce.getAttribute("key"))) {
 
                 chain.doFilter(request, response);
             }
