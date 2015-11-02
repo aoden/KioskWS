@@ -11,6 +11,6 @@ import org.springframework.data.repository.query.Param;
 public interface ClientRepository extends JpaRepository<Client, String> {
 
     Client findByClientIDAndClientSecret(String clientID, String clientSecret);
-    @Query("from Client c where c.id in (select client.id from ClientMapper m where m.key = :key)")
+    @Query("select client from ClientMapper m where m.key = :key")
     Client findByKey(@Param("key")String key);
 }

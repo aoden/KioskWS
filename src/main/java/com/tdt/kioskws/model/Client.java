@@ -1,5 +1,6 @@
 package com.tdt.kioskws.model;
 
+import com.tdt.kioskws.dto.ClientDTO;
 import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
@@ -23,4 +24,13 @@ public class Client {
     protected String clientSecret;
     @OneToOne(mappedBy = "client")
     protected ClientMapper clientMapper;
+
+    public ClientDTO toDTO() {
+
+        return ClientDTO.builder()
+                .clientID(clientID)
+                .clientSecret(clientSecret)
+                .clientMapper(clientMapper == null ? null : clientMapper.toDTO())
+                .build();
+    }
 }
