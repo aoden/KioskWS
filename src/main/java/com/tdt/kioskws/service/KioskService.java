@@ -24,7 +24,8 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Auth service
+ * KioskService
+ * @author aoden
  */
 @Path("/")
 @Service

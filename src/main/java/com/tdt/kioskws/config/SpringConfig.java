@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * SpringConfig
+ * @author aoden
  */
 @Configuration
 @Component

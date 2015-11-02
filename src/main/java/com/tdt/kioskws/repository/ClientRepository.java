@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 /**
  * ClientRepository
+ * @author aoden
  */
 public interface ClientRepository extends JpaRepository<Client, String> {
 
