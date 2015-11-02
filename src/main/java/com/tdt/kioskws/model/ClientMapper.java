@@ -17,7 +17,8 @@ public class ClientMapper {
     @GeneratedValue
     protected int id;
 
-    @OneToOne(mappedBy = "clientMapper")
+    @OneToOne
+    @PrimaryKeyJoinColumn
     protected Client client;
     @Column(unique = true)
     protected String key;

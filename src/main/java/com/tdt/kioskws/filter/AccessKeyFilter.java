@@ -16,7 +16,6 @@ import java.io.IOException;
  * AccessKeyFilter
  */
 @Component
-@WebFilter()
 public class AccessKeyFilter implements Filter {
 
     @Autowired
@@ -32,11 +31,10 @@ public class AccessKeyFilter implements Filter {
 
         HttpServletRequest servletRequest = (HttpServletRequest) request;
         HttpSession session = servletRequest.getSession();
-        String submittedAccessKey = servletRequest.getParameter("access_token");
+        String submittedAccessKey = servletRequest.getParameter("key");
         if (StringUtils.isNotEmpty(submittedAccessKey)) {
 
-            if (submittedAccessKey.equals(session.getAttribute("access_token"))
-                    || servletRequest.getContextPath().equals("/link")) {
+            if (servletRequest.getServletPath().equals("/link") || submittedAccessKey.equals(session.getAttribute("key"))) {
 
                 chain.doFilter(request, response);
             }
